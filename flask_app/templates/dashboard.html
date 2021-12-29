@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <H1 class="text-center mt-5">Paintings Master List</H1>
+    <nav class="d-flex justify-content-between align-items-center col-12 mt-5">
+            <H2 class="text-center">Welcome {{artist.first_name}}!</H2>
+                <div class="d-flex col-4 justify-content-around">
+                <a href="/new/painting">Add Painting</a>
+                <a href="/logout" class="btn btn-info">Logout</a>
+                </div>
+    </nav>
+
+    <div class="col-8 mx-auto mt-3">
+        <H3 class="text-center">All Paintings</H3>
+            {% for painting in paintings %}
+                            <p>
+                            <a href="/painting/{{painting.id}}">{{painting.title}} <span class="text-dark col-12">Painter: {{painting.artist.first_name}} {{painting.artist.last_name}}</span></a>
+                            {% if painting.artist_id == session.artist_id %}
+                            <a href="/destroy/painting/{{painting.id}}">Delete</a>
+                            <a href="/edit/painting/{{painting.id}}">Edit</a>
+                            {% endif %}
+                            {% endfor %}
+                            </p>
+</body>
+</html>

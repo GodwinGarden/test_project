@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Painting</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <nav class="d-flex justify-content-between align-items-center col-12 mt-5">
+            <H2 class="text-center">Edit a Painting</H2>
+                <div class="d-flex col-4 justify-content-around">
+                <a href="/new/painting">Add Painting</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout" class="btn btn-info">Logout</a>
+                </div>
+        </nav>
+    </div>
+    <form action="/update/painting" method="post" class="col-10 p-4 my-4 bg-dark text-light mx-auto">
+        {% with messages = get_flashed_messages(category_filter=['painting']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Please complete all fields</strong>
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="d-flex justify-content-between col-9">
+            <input type="hidden" name="id" value={{edit.id}}>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" class="form-control" value="{{edit.title}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea name="description"  cols="30" rows="5" class="form-control" required>{{edit.description}}</textarea>
+                </div>
+            </div>
+            <div class="col-4">
+                <label for="price">Price:</label>
+                <div class="input-group-text bg-dark">
+                    <input type="number" name="price" class="form-control" required>
+                    </div>
+                <br>
+                <input type="submit" value="Update Info" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
